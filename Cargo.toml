@@ -1,0 +1,12 @@
+[package]
+name = "fqdn"
+version = "0.1.0"
+authors = ["melbadry9 <me@melbadry9.xyz>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+addr = "0.14.0"
+clap = "2.33.3"
+threadpool = "1.8.1"
