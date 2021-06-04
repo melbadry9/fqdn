@@ -10,3 +10,5 @@ edition = "2018"
 addr = "0.14.0"
 clap = "2.33.3"
 threadpool = "1.8.1"
+serde_json = "1.0.59"
+serde = { version = "1.0.126", features = ["derive"] }
