@@ -1,16 +1,15 @@
-use clap::{App, Arg};
-use std::io::{self, BufRead};
-use threadpool::ThreadPool;
 use addr::parser::DnsName;
 use addr::psl::List;
+use clap::{App, Arg};
 use serde::{Deserialize, Serialize};
-
+use std::io::{self, BufRead};
+use threadpool::ThreadPool;
 
 #[derive(Serialize, Deserialize, Debug)]
- struct DomName {
-     root_domain: String,
-     sub_domain: String
- }
+struct DomName {
+    root_domain: String,
+    sub_domain: String,
+}
 
 fn main() {
     let args = App::new("Check Domain Availability")
@@ -52,11 +51,14 @@ fn main() {
         );
         for domain in stream.lock().lines() {
             let opt = args.is_present("json").clone();
-            pool.execute(move || check_av(&mut domain.unwrap(), opt ));
+            pool.execute(move || check_av(&mut domain.unwrap(), opt));
         }
         pool.join();
     } else {
-        check_av(&mut args.value_of("domain").unwrap().to_string(), args.is_present("json"))
+        check_av(
+            &mut args.value_of("domain").unwrap().to_string(),
+            args.is_present("json"),
+        )
     }
 }
 
@@ -73,19 +75,17 @@ fn check_av(domain: &mut String, output: bool) {
                     if output {
                         let dom = DomName {
                             root_domain: root.to_string(),
-                            sub_domain: sub
+                            sub_domain: sub,
                         };
                         let ser_domain = serde_json::to_string(&dom).unwrap();
                         println!("{}", ser_domain);
-
                     } else {
                         println!("{}", root)
                     }
-                },
+                }
                 None => {}
             }
-        },
+        }
         Err(_) => {}
     }
-    
 }
