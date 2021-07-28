@@ -12,7 +12,7 @@ struct DomName {
 }
 
 fn main() {
-    let args = App::new("Check Domain Availability")
+    let args = App::new("Extract Root-domain/Sub-domain")
         .version("0.1")
         .author("Mohamed Elbadry <me@melbadry9.xyz>")
         .arg(
