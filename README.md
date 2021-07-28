@@ -1,5 +1,5 @@
 # fqdn
-Extract root and sub domain from FQDN
+Extract sub-domain and root-domain from FQDN
 
 ## Install
 
